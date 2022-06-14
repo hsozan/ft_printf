@@ -69,6 +69,8 @@ int	ft_nbrtoa_toprint(unsigned long long int nbr,
 		res += ft_putstr("0x");
 		base_c = "0123456789abcdef";
 	}
+	if (nbr == 0)
+		res += ft_putstr("0");
 	while (nbr)
 	{
 		nbr_final[i] = nbr % base;

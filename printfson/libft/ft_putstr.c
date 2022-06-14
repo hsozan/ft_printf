@@ -34,5 +34,9 @@ int	ft_putstr(char *s)
 			i++;
 		}
 	}
+	else
+	{
+		return (ft_putstr("(null)"));
+	}
 	return (i);
 }
