@@ -12,7 +12,7 @@
 
 #include"ft_printf.h"
 
-int	ft_neghandle(long long int n, const char *input)
+int	ft_neghandle(long long int n, const char *s)
 {
 	int	res;
 
@@ -22,19 +22,19 @@ int	ft_neghandle(long long int n, const char *input)
 		n = -n;
 		res += ft_putchar('-');
 	}
-	res += ft_nbrtoa_toprint(n, 10, input, 0);
+	res += ft_nbrtoa_toprint(n, 10, s, 0);
 	return (res);
 }
 
-char	*hex_check(const char *input)
+char	*hex_check(const char *s)
 {
-	while (*input)
+	while (*s)
 	{
-		if (*input == 'x')
+		if (*s == 'x' || *s == 'p')
 			return ("0123456789abcdef");
-		else if (*input == 'X')
+		else if (*s == 'X')
 			return ("0123456789ABCDEF");
-		input++;
+		s++;
 	}
 	return ("0123456789");
 }
@@ -52,10 +52,7 @@ int	ft_nbrtoa_toprint(unsigned long long int nbr,
 	res = 0;
 	base_c = hex_check(s);
 	if (p)
-	{
 		res += ft_putstr("0x");
-		base_c = "0123456789abcdef";
-	}
 	if (nbr == 0)
 		res += ft_putstr("0");
 	while (nbr)
@@ -69,46 +66,43 @@ int	ft_nbrtoa_toprint(unsigned long long int nbr,
 	return (res);
 }
 
-int	ft_sort(const char *input, va_list arg)
+int	ft_sort(const char *s, va_list arg)
 {
-	char	c;
-
-	c = *input;
-	if (c == 'd' || c == 'i')
-		return (ft_neghandle(va_arg(arg, int), input));
-	if (c == 'u')
-		return (ft_nbrtoa_toprint(va_arg(arg, unsigned int), 10, input, 0));
-	if (c == 'x' || c == 'X')
-		return (ft_nbrtoa_toprint(va_arg(arg, unsigned int), 16, input, 0));
-	if (c == 'p')
-		return (ft_nbrtoa_toprint(va_arg(arg, unsigned long), 16, input, 1));
-	if (c == 's')
+	if (*s == 'd' || *s == 'i')
+		return (ft_neghandle(va_arg(arg, int), s));
+	if (*s == 'u')
+		return (ft_nbrtoa_toprint(va_arg(arg, unsigned int), 10, s, 0));
+	if (*s == 'x' || *s == 'X')
+		return (ft_nbrtoa_toprint(va_arg(arg, unsigned int), 16, s, 0));
+	if (*s == 'p')
+		return (ft_nbrtoa_toprint(va_arg(arg, unsigned long), 16, s, 1));
+	if (*s == 's')
 		return (ft_putstr(va_arg(arg, char *)));
-	if (c == 'c')
+	if (*s == 'c')
 		return (ft_putchar(va_arg(arg, int)));
-	if (c == '%')
+	if (*s == '%')
 		return (ft_putchar('%'));
 	return (0);
 }
 
-int	ft_printf(const char *input, ...)
+int	ft_printf(const char *s, ...)
 
 {
 	va_list		args;
 	int			res;
 
 	res = 0;
-	va_start(args, input);
-	while (*input)
+	va_start(args, s);
+	while (*s)
 	{
-		if (*input == '%')
+		if (*s == '%')
 		{
-			input++;
-			res += ft_sort(input, args);
+			s++;
+			res += ft_sort(s, args);
 		}
 		else
-		res += write(1, &*input, 1);
-		input++;
+		res += write(1, &*s, 1);
+		s++;
 	}
 	va_end(args);
 	return (res);
