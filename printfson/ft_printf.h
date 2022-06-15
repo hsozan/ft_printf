@@ -22,6 +22,6 @@ int		nbrcount(unsigned int n, int base);
 int		ft_neghandle(long long int n, const char *input);
 int		ft_nbrtoa_toprint(unsigned long long int n, int base,
 			const char *s, int p);
-char	*hex_check(const char *input, int i);
+char	*hex_check(const char *input);
 
 #endif

@@ -35,7 +35,7 @@ clean:
 	@echo "$(BLUE).o$(CYAN) dosyaları silindi"
 
 fclean:
-	@$(RM) output $(NAME)
+	@$(RM) output printfTester $(NAME)
 	@echo " $(BLUE)$(NAME)$(CYAN) ve $(BLUE).o$(CYAN) dosyaları silindi"
 
 norm:
@@ -44,10 +44,8 @@ norm:
 	@echo "$(BLUE)ft_printf dosyaları :$(CYAN)"
 	@norminette *.c *.h
 test:
-	@mv main.c ..
 	@make re
-	@mv ../main.c .
-	@gcc main.c $(NAME)
-	@./a.out
+	@git clone https://github.com/Tripouille/printfTester.git
+	@cd printfTester && make m
 
 re: fclean all

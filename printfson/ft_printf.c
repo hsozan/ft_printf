@@ -12,6 +12,63 @@
 
 #include"ft_printf.h"
 
+int	ft_neghandle(long long int n, const char *input)
+{
+	int	res;
+
+	res = 0;
+	if (n < 0)
+	{
+		n = -n;
+		res += ft_putchar('-');
+	}
+	res += ft_nbrtoa_toprint(n, 10, input, 0);
+	return (res);
+}
+
+char	*hex_check(const char *input)
+{
+	while (*input)
+	{
+		if (*input == 'x')
+			return ("0123456789abcdef");
+		else if (*input == 'X')
+			return ("0123456789ABCDEF");
+		input++;
+	}
+	return ("0123456789");
+}
+
+int	ft_nbrtoa_toprint(unsigned long long int nbr,
+		int base, const char *s, int p)
+
+{
+	char	*base_c;
+	int		nbr_backwards[100];
+	int		i;
+	int		res;
+
+	i = 0;
+	res = 0;
+	base_c = hex_check(s);
+	if (p)
+	{
+		res += ft_putstr("0x");
+		base_c = "0123456789abcdef";
+	}
+	if (nbr == 0)
+		res += ft_putstr("0");
+	while (nbr)
+	{
+		nbr_backwards[i] = nbr % base;
+		nbr = nbr / base;
+		i++;
+	}
+	while (--i >= 0)
+		res += ft_putchar (base_c[nbr_backwards[i]]);
+	return (res);
+}
+
 int	ft_sort(const char *input, va_list arg)
 {
 	char	c;
