@@ -26,31 +26,16 @@ int	ft_neghandle(long long int n, const char *s)
 	return (res);
 }
 
-char	*hex_check(const char *s)
-{
-	while (*s)
-	{
-		if (*s == 'x' || *s == 'p')
-			return ("0123456789abcdef");
-		else if (*s == 'X')
-			return ("0123456789ABCDEF");
-		s++;
-	}
-	return ("0123456789");
-}
-
-int	ft_nbrtoa_toprint(unsigned long long int nbr,
+int	ft_nbrtoa_toprint(unsigned long long int nbr, char	*base_c,
 		int base, const char *s, int p)
 
 {
-	char	*base_c;
 	int		nbr_backwards[100];
 	int		i;
 	int		res;
 
 	i = 0;
 	res = 0;
-	base_c = hex_check(s);
 	if (p)
 		res += ft_putstr("0x");
 	if (nbr == 0)
@@ -71,11 +56,13 @@ int	ft_sort(const char *s, va_list arg)
 	if (*s == 'd' || *s == 'i')
 		return (ft_neghandle(va_arg(arg, int), s));
 	if (*s == 'u')
-		return (ft_nbrtoa_toprint(va_arg(arg, unsigned int), 10, s, 0));
-	if (*s == 'x' || *s == 'X')
-		return (ft_nbrtoa_toprint(va_arg(arg, unsigned int), 16, s, 0));
+		return (ft_nbrtoa_toprint(va_arg(arg, unsigned int), "0123456789", 10, s, 0));
+	if (*s == 'x' )
+		return (ft_nbrtoa_toprint(va_arg(arg, unsigned int), "0123456789abcdef", 16, s, 0));
+	if (*s == 'X')
+		return (ft_nbrtoa_toprint(va_arg(arg, unsigned int), "0123456789ABCDEF", 16, s, 0));
 	if (*s == 'p')
-		return (ft_nbrtoa_toprint(va_arg(arg, unsigned long), 16, s, 1));
+		return (ft_nbrtoa_toprint(va_arg(arg, unsigned long), "0123456789abcdef", 16, s, 1));
 	if (*s == 's')
 		return (ft_putstr(va_arg(arg, char *)));
 	if (*s == 'c')
