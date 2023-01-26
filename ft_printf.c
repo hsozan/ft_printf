@@ -1,7 +1,7 @@
 #include <stdarg.h>
 #include <unistd.h>
 
-//ft_printf with s d x X c p u %
+//ft_printf with s d x X % c p u
 int	ft_putchar(char c)
 {
 	return (write(1, &c, 1));
@@ -30,7 +30,7 @@ int	ft_putnbr_base(unsigned long int n, char *base_c, int base)
 
 	res = 0;
 	i = 0;
-	if (n < 0)
+	if (n < 0 && base == 10)
 	{
 		res += ft_putchar('-');
 		n *= -1;
@@ -67,9 +67,8 @@ int	ft_sort(char c, va_list args)
 					unsigned long int), "0123456789abcdef", 16));
 	else if (c == 'u')
 		return (ft_putnbr_base(va_arg(args, unsigned int), "0123456789", 10));
-	else if (c == '%')
-		return (ft_putchar('%'));
-	return (0);
+	else
+		return (ft_putchar(c));
 }
 
 int	ft_printf(const char *s, ...)
