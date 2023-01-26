@@ -101,8 +101,9 @@ int	ft_printf(const char *s, ...)
 int main()
 {
     int a = 12;
-    ft_printf("Hello %s %d %x %X %c %p %u %%\n", "World", a, a, a, 'A', &a, 42);
-    printf("Hello %s %d %x %X %c %p %u %%\n", "World", a, a, a, 'A', &a, 42);
+
+    ft_printf("%i\n",ft_printf("Hello %s %d %x %X %c %p %u %%\n", "World", a, a, a, 'A', &a, 42));
+    printf("%i\n",printf("Hello %s %d %x %X %c %p %u %%\n", "World", a, a, a, 'A', &a, 42));
 
     return 0;
 }*/
