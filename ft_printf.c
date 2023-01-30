@@ -52,7 +52,7 @@ int	ft_sort(char c, va_list args)
 {
 	if (c == 's')
 		return (ft_putstr(va_arg(args, char *)));
-	else if (c == 'd')
+	else if (c == 'd' || c == 'i')
 		return (ft_putnbr_base(va_arg(args, int), "0123456789", 10));
 	else if (c == 'x')
 		return (ft_putnbr_base(va_arg(args, unsigned long int), \
@@ -102,8 +102,8 @@ int main()
 {
     int a = 12;
 
-    ft_printf("%i\n",ft_printf("Hello %s %d %x %X %c %p %u %%\n", "World", a, a, a, 'A', &a, 42));
-    printf("%i\n",printf("Hello %s %d %x %X %c %p %u %%\n", "World", a, a, a, 'A', &a, 42));
+    ft_printf("%i\n",ft_printf("Hello %s %i %d %x %X %c %p %u %%\n", "World", a, a, a, a, 'A', &a, 42));
+    printf("%i\n",printf("Hello %s %i %d %x %X %c %p %u %%\n", "World", a, a, a, a, 'A', &a, 42));
 
     return 0;
 }*/
