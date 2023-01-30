@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hsozan <hsozan@student.42.tr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/30 16:37:47 by hsozan            #+#    #+#             */
+/*   Updated: 2023/01/30 16:39:44 by hsozan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdarg.h>
 #include <unistd.h>
 
@@ -97,13 +109,15 @@ int	ft_printf(const char *s, ...)
 	va_end(args);
 	return (res);
 }
-/*#include <stdio.h>
-int main()
-{
-    int a = 12;
-
-    ft_printf("%i\n",ft_printf("Hello %s %i %d %x %X %c %p %u %%\n", "World", a, a, a, a, 'A', &a, 42));
-    printf("%i\n",printf("Hello %s %i %d %x %X %c %p %u %%\n", "World", a, a, a, a, 'A', &a, 42));
-
-    return 0;
-}*/
+//#include <stdio.h>
+//int main()
+//{
+//   int a = 12;
+//
+//    ft_printf("%i\n",ft_printf("Hello %s %i %d %x %X %c %p %u %%\n",
+//    "World", a, a, a, a, 'A', &a, 42));
+//    printf("%i\n",printf("Hello %s %i %d %x %X %c %p %u %%\n",
+//    "World", a, a, a, a, 'A', &a, 42));
+//
+//    return 0;
+//}
