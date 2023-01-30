@@ -14,6 +14,8 @@ $(NAME):
 
 clean:
 	@rm *.o
+	@echo "$(BLUE)output dosyası$(CYAN) silindi"
 
 fclean:
 	@rm $(NAME)
+	@@echo "$(BLUE)library dosyası$(CYAN) silindi"
