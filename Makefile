@@ -16,7 +16,7 @@ clean:
 	@$(RM) *.o
 	@echo "$(BLUE)output dosyası$(CYAN) silindi"
 
-fclean:
+fclean:	clean
 	@$(RM) $(NAME)
 	@echo "$(BLUE)library dosyası$(CYAN) silindi"
 
