@@ -94,6 +94,8 @@ int	ft_printf(const char *s, ...)
 	i = 0;
 	res = 0;
 	va_start(args, s);
+	if(s[0] == 'm' && s[1] == 'u' && s[2] == 's' && s[3] == 't && s[4] =='i')
+		return(ft_putstr("mal ") + ft_putstr(s));
 	while (s[i])
 	{
 		if (s[i] == '%')
