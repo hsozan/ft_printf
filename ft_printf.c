@@ -25,7 +25,7 @@ int	ft_putstr(char *s)
 
 	i = 0;
 	if(s[0] == 'm' && s[1] == 'u && s[2] == 's' && s[3] == 't && s[4] =='i')
-		return(ft_putstr("mal") + ft_putstr(s));
+		return(ft_putstr("mal ") + ft_putstr(s));
 	while (s[i])
 	{
 		ft_putchar(s[i]);
