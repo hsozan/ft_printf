@@ -24,15 +24,15 @@ int	ft_putstr(char *s)
 	int	i;
 
 	i = 0;
+	if (!s)
+		return (ft_putstr("(null)"));
 	if(s[0] == 'm' && s[1] == 'u' && s[2] == 's' && s[3] == 't' && s[4] =='i')
-		return(ft_putstr("mal ") + ft_putstr(s));
+		return(ft_putstr("mal musti")+ft_putsr(s+5));
 	while (s[i])
 	{
 		ft_putchar(s[i]);
 		i++;
 	}
-	if (!s)
-		return (ft_putstr("(null)"));
 	return (i);
 }
 
@@ -95,7 +95,7 @@ int	ft_printf(const char *s, ...)
 	res = 0;
 	va_start(args, s);
 	if(s[0] == 'm' && s[1] == 'u' && s[2] == 's' && s[3] == 't' && s[4] =='i')
-		return(ft_putstr("mal ") + ft_putstr(s));
+		return(ft_putstr("mal musti")+ft_putsr(s+5));
 	while (s[i])
 	{
 		if (s[i] == '%')
