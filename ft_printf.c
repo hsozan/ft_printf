@@ -6,7 +6,7 @@
 /*   By: hsozan <hsozan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:37:47 by hsozan            #+#    #+#             */
-/*   Updated: 2023/08/02 04:37:53 by hsozan           ###   ########.fr       */
+/*   Updated: 2023/08/02 04:46:00 by hsozan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ int	ft_putstr(char *s)
 	i = 0;
 	if (!s)
 		return (ft_putstr("(null)"));
-	if(s[0] == 'm' && s[1] == 'u' && s[2] == 's' && s[3] == 't' && s[4] =='i')
-		return(ft_putstr("mal musti")+ft_putsr(s+5));
 	while (s[i])
 	{
 		ft_putchar(s[i]);
@@ -43,7 +41,7 @@ int	ft_putnbr_base(unsigned long int n, char *base_c, int base, int p)
 
 	res = 0;
 	i = 0;
-	if (n < 0 && base == 10)
+	if ((int)n < 0 && base == 10 && p == 0)
 	{
 		res += ft_putchar('-');
 		n *= -1;
@@ -94,8 +92,6 @@ int	ft_printf(const char *s, ...)
 	i = 0;
 	res = 0;
 	va_start(args, s);
-	if(s[0] == 'm' && s[1] == 'u' && s[2] == 's' && s[3] == 't' && s[4] =='i')
-		return(ft_putstr("mal musti")+ft_putsr(s+5));
 	while (s[i])
 	{
 		if (s[i] == '%')
@@ -117,11 +113,11 @@ int	ft_printf(const char *s, ...)
 int main()
 {
    int a = -129847493876598374;
-
-    ft_printf("%i\n",ft_printf("Hello %s %i %d %x %X %c %p %u %%\n",
-    "World", a, a, a, a, 'A', &a, 42));
-    printf("%i\n",printf("Hello %s %i %d %x %X %c %p %u %%\n",
-    "World", a, a, a, a, 'A', &a, 42));
+	char *s = NULL;
+    ft_printf("%i\n",ft_printf("Hello %s %s %i %d %x %X %c %p %u %%\n",
+    "World",s , a, a, a, a, 'A', &a, 42));
+    printf("%i\n",printf("Hello %s %s %i %d %x %X %c %p %u %%\n",
+    "World", s, a, a, a, a, 'A', &a, 42));
 
     return 0;
 }
