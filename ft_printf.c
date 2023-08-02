@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsozan <hsozan@student.42.tr>              +#+  +:+       +#+        */
+/*   By: hsozan <hsozan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:37:47 by hsozan            #+#    #+#             */
-/*   Updated: 2023/01/30 16:39:44 by hsozan           ###   ########.fr       */
+/*   Updated: 2023/08/02 04:36:32 by hsozan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include <unistd.h>
+#include "ft_printf.h"
 
 //ft_printf with s d x X % c p u
 int	ft_putchar(char c)
@@ -34,7 +33,7 @@ int	ft_putstr(char *s)
 	return (i);
 }
 
-int	ft_putnbr_base(unsigned long int n, char *base_c, int base)
+int	ft_putnbr_base(unsigned long int n, char *base_c, int base, int p)
 {
 	int	res;
 	int	i;
@@ -42,7 +41,7 @@ int	ft_putnbr_base(unsigned long int n, char *base_c, int base)
 
 	res = 0;
 	i = 0;
-	if (n < 0 && base == 10)
+	if ((int)n < 0 && base == 10 && p == 0)
 	{
 		res += ft_putchar('-');
 		n *= -1;
@@ -65,20 +64,21 @@ int	ft_sort(char c, va_list args)
 	if (c == 's')
 		return (ft_putstr(va_arg(args, char *)));
 	else if (c == 'd' || c == 'i')
-		return (ft_putnbr_base(va_arg(args, int), "0123456789", 10));
+		return (ft_putnbr_base(va_arg(args, int), "0123456789", 10, 0));
 	else if (c == 'x')
-		return (ft_putnbr_base(va_arg(args, unsigned long int), \
-				"0123456789abcdef", 16));
+		return (ft_putnbr_base(va_arg(args, unsigned int), \
+				"0123456789abcdef", 16, 1));
 	else if (c == 'X')
-		return (ft_putnbr_base(va_arg(args, unsigned long int), \
-					"0123456789ABCDEF", 16));
+		return (ft_putnbr_base(va_arg(args, unsigned int), \
+					"0123456789ABCDEF", 16, 1));
 	else if (c == 'c')
 		return (ft_putchar(va_arg(args, int)));
 	else if (c == 'p')
 		return (ft_putstr("0x") + ft_putnbr_base(va_arg(args, \
-					unsigned long int), "0123456789abcdef", 16));
+					unsigned long int), "0123456789abcdef", 16, 0));
 	else if (c == 'u')
-		return (ft_putnbr_base(va_arg(args, unsigned int), "0123456789", 10));
+		return (ft_putnbr_base(va_arg(args, \
+				unsigned int), "0123456789", 10, 1));
 	else
 		return (ft_putchar(c));
 }
@@ -109,15 +109,16 @@ int	ft_printf(const char *s, ...)
 	va_end(args);
 	return (res);
 }
-//#include <stdio.h>
-//int main()
-//{
-//   int a = 12;
-//
-//    ft_printf("%i\n",ft_printf("Hello %s %i %d %x %X %c %p %u %%\n",
-//    "World", a, a, a, a, 'A', &a, 42));
-//    printf("%i\n",printf("Hello %s %i %d %x %X %c %p %u %%\n",
-//    "World", a, a, a, a, 'A', &a, 42));
-//
-//    return 0;
-//}
+/*#include <stdio.h>
+int main()
+{
+   int a = -129847493876598374;
+
+    ft_printf("%i\n",ft_printf("Hello %s %i %d %x %X %c %p %u %%\n",
+    "World", a, a, a, a, 'A', &a, 42));
+    printf("%i\n",printf("Hello %s %i %d %x %X %c %p %u %%\n",
+    "World", a, a, a, a, 'A', &a, 42));
+
+    return 0;
+}
+*/
